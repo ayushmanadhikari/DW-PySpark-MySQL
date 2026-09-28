@@ -3,8 +3,8 @@ from pyspark.sql import SparkSession
 ## creating spark session
 spark = SparkSession.builder.config("spark.jars.packages", "com.mysql:mysql-connector-j:8.3.0")\
 .config('spark.log.level', "ERROR")\
-.config("spark.driver.memory", "2g") \
-.config("spark.executor.memory", "2g") \
+.config("spark.driver.memory", "3g") \
+.config("spark.executor.memory", "3g") \
 .appName('Spark1')\
 .getOrCreate()
 
