@@ -1,0 +1,5 @@
+data/raw_data/
+myvenv/
+misc/
+.ipynb_checkpoints/
+scripts/__pycache__/
