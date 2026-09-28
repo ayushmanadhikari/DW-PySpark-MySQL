@@ -43,11 +43,12 @@ print(f"Rows count after dropping nulls: {bronze_df.count()}")
 ##  silver layer table definition with type casting, dropping some old columns and adding some new columns
 print("performing transformation...")
 df_silver = bronze_df\
-    .withColumnRenamed('trans_ts', 'trans_date_trans_time')\
+    .withColumnRenamed('trans_date_trans_time', 'trans_ts')\
     .withColumn('card_last4', F.substring(col('cc_num').cast('string'), -4, 4))\
     .withColumn('merchant', F.trim(col('merchant')))\
-    .withColumn('category_id', F.trim(col('category')))\
-    .withColumnRenamed('amount', 'amt')\
+    .withColumn('category_name', F.trim(col('category')))\
+    .withColumnRenamed('amt', 'amount')\
+    .withColumn('cust_id', F.sha2(col('cc_num').cast('string'), 256))\
     .withColumn('fname', F.trim(col('first')))\
     .withColumn('lname', F.trim(col('last')))\
     .withColumn('gender', F.upper(F.trim(col('gender'))))\
@@ -58,7 +59,7 @@ df_silver = bronze_df\
     .withColumn('cust_lat', col('lat'))\
     .withColumn('cust_long', col('long'))\
     .withColumn('cust_job', F.trim(col('job')))\
-    .withColumnRenamed('cust_dob', 'dob')\
+    .withColumnRenamed('dob', 'cust_dob')\
     .withColumn('dist', haversine_km(col('cust_lat'), col('cust_long'), col('merch_lat'), col('merch_long')))\
     .withColumn('s_processing_ts', F.current_timestamp())\
     .drop('_c0', 'cc_num', 'amt', 'lat', 'long', 'city_pop', 'unix_time')
