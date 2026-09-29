@@ -75,5 +75,6 @@
     - cat_name
 
 
-## now let's translate these into sql ddl to set up our database as well as tables
-The structure of our warehouse will be:
+## we have now created a ddl.sql script that will initialize all the databases. Gold database has been initialized with the above fact and dimension tables
+
+## next step is to ingest the fraudTrain.csv and start processing the data
